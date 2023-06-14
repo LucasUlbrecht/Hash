@@ -14,4 +14,4 @@ void testInsert(hash* t){
 int main (void){
     hash *t;
     testInsert(t);
-}
+}//
