@@ -65,17 +65,18 @@ void genHash(hash* t, int size, unsigned int (*getKey)(int, void*), bool (*compa
     t->deleted='*';
     t->compara=compara;
 }
-/*
-void insert(hash** t, void* dado){
+
+void insert(hash* t, void* dado){
     if(t==NULL||dado==NULL) return;
-    uintptr_t pos = (*t)->get_key(**t, dado);
-    while((*t)->table[pos] !=0 && (*t)->table[pos] != (*t)->deleted) pos = (pos + 1) % (*t)->size;
-    (*t)->table[pos] = (uintptr_t)dado;
-    (*t)->atualSize++;
-    if(!checksize(*t)){
+    uintptr_t pos = t->get_key(t->size, dado);
+    while(t->table[pos] !=NULL && t->table[pos] != t->deleted) pos = (pos + 1) % t->size;
+    t->table[pos] = (uintptr_t)dado;
+    t->atualSize++;
+    /*if(!checksize(*t)){
         reSize(t);
-    }
+    }*/
 }
+/*
 void * search(hash* t, void* dado){
     if(t==NULL||dado==NULL) return;
     uintptr_t pos = t->get_key(*t, dado);
