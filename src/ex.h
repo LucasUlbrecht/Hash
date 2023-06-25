@@ -30,6 +30,7 @@ typedef struct MunicipiosBrasileiros
 }munic;
 //void gerarLista(hash t);
 //void printDado(hash t);
+int passos(int size, void* dado);
 int getKey(int t, int cod); //testado
 bool compara(void* dadoTable, void* dadoComp); //testado
 unsigned int doubleHashFunction(int size, void* dado);

@@ -55,7 +55,7 @@ int acharPrimoProx(int num) {
 }
 
 
-void genHash(hash* t, int size, unsigned int (*getKey)(int, void*), bool (*compara)(void*, void*)){
+void genHash(hash* t, int size, unsigned int (*getKey)(int, void*), bool (*compara)(void*, void*), int (*passos) (int, void*)){
     t->table=(uintptr_t*)calloc(size,sizeof(uintptr_t));
     if (t->table == NULL){
         return;
@@ -64,12 +64,13 @@ void genHash(hash* t, int size, unsigned int (*getKey)(int, void*), bool (*compa
     t->get_key=getKey;
     t->deleted='*';
     t->compara=compara;
+    t->passos=passos;
 }
 
 void insert(hash* t, void* dado){
     if(t==NULL||dado==NULL) return;
     uintptr_t pos = t->get_key(t->size, dado);
-    while(t->table[pos] !=NULL && t->table[pos] != t->deleted) pos = (pos + 1) % t->size;
+    while(t->table[pos] !=NULL && t->table[pos] != t->deleted) pos = (pos + t->passos(t->size, dado)) % t->size;
     t->table[pos] = (uintptr_t)dado;
     t->atualSize++;
     /*if(!checksize(*t)){
