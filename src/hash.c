@@ -74,7 +74,7 @@ void insert(hash* t, void* dado){
         }
     t->table[pos] = (uintptr_t)dado;
     t->atualSize++;
-    if(!checksize(t)){
+    if(checksize(t)){
         reSize(t);
     }
 }
