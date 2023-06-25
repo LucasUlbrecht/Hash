@@ -73,7 +73,7 @@ void testBusca(hash t){
     assert(test2!=NULL);
     assert(strcmp(test2->Capital, "SP")==0);
 }
-/*
+
 void testReSize(hash t){
     munic munic1;
     munic munic2;
@@ -93,9 +93,8 @@ void testReSize(hash t){
     insert(&t, &munic4);
     insert(&t, &munic5);
     insert(&t, &munic6);
-    assert(t.atualSize==9);
-    //assert(t.size==29);
-}*/
+    assert(t.size==29);
+}
 int main (void){
     hash t;
     testGen(&t);
@@ -103,5 +102,5 @@ int main (void){
     testHashfy2(t);
     testInsert(t);
     testBusca(t);
-    //testReSize(t);
+    testReSize(t);
 }
