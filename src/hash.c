@@ -69,9 +69,7 @@ void genHash(hash* t, int size, unsigned int (*getKey)(int, void*), bool (*compa
 void insert(hash* t, void* dado){
     if(t==NULL&&dado==NULL) return;
     uintptr_t pos = t->get_key(t->size, dado);
-    while(t->table[pos] !=NULL && t->table[pos] != t->deleted) {
-        pos = (pos + t->passos(t->size, dado)) % t->size;
-        }
+    while(t->table[pos] !=NULL && t->table[pos] != t->deleted) pos = (pos + t->passos(t->size, dado)) % t->size;
     t->table[pos] = (uintptr_t)dado;
     t->atualSize++;
     if(checksize(t)){
