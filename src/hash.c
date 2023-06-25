@@ -1,5 +1,4 @@
 #include "hash.h"
-/*
 bool checksize(hash* t){
     if(t->atualSize%t->size<0.7){
         return true; //Tamanho aceitavel
@@ -18,7 +17,6 @@ void hash_apaga(hash *h){
     }
     free(h->table);
 }
-*/
 bool primo(int num) {
     if (num <= 1) {
         return false;
@@ -60,6 +58,7 @@ void genHash(hash* t, int size, unsigned int (*getKey)(int, void*), bool (*compa
     if (t->table == NULL){
         return;
     }
+    t->atualSize=0;
     t->size=(unsigned int)size;
     t->get_key=getKey;
     t->deleted='*';
@@ -68,30 +67,33 @@ void genHash(hash* t, int size, unsigned int (*getKey)(int, void*), bool (*compa
 }
 
 void insert(hash* t, void* dado){
-    if(t==NULL||dado==NULL) return;
+    if(t==NULL&&dado==NULL) return;
     uintptr_t pos = t->get_key(t->size, dado);
     while(t->table[pos] !=NULL && t->table[pos] != t->deleted) pos = (pos + t->passos(t->size, dado)) % t->size;
     t->table[pos] = (uintptr_t)dado;
     t->atualSize++;
-    /*if(!checksize(*t)){
+    if(checksize(t)){
         reSize(t);
-    }*/
+    }
 }
-/*
+
 void * search(hash* t, void* dado){
     if(t==NULL||dado==NULL) return;
-    uintptr_t pos = t->get_key(*t, dado);
-    while(!(t->compara(t->table[pos],dado))) pos = (pos + 1) % t->size;
+    uintptr_t pos = t->get_key(t->size, dado);
+    while(!(t->compara(t->table[pos],dado))) {
+        pos = (pos + t->passos(t->size, dado)) % t->size;
+        }
     return (void*) t->table[pos];
 }
-void reSize(hash** t){
-    int tamanhoNovo=(*t)->size;
-    tamanhoNovo=acharPrimoProx(tamanhoNovo*2);
+void reSize(hash* t) {
+    int tamanhoNovo = t->size;
+    tamanhoNovo = acharPrimoProx(tamanhoNovo * 2);
     hash* nova;
-    genHash(&nova, tamanhoNovo, (*t)->get_key, (*t)->compara);
-    for(int i=0;i<(*t)->size;i++){
-        insert(nova, (*t)->table[i]);
-    };
-    //encerra
-    t=&nova;
-}*/
+    genHash(&nova, tamanhoNovo, t->get_key, t->compara, t->passos);
+    for (int i = 0; i < t->size; i++) {
+        insert(nova, (void*)t->table[i]);
+    }
+    free(t->table);
+    free(t);
+    t = nova;
+}

@@ -33,5 +33,5 @@ typedef struct MunicipiosBrasileiros
 int passos(int size, void* dado);
 int getKey(int t, int cod); //testado
 bool compara(void* dadoTable, void* dadoComp); //testado
-unsigned int doubleHashFunction(int size, void* dado);
+unsigned int doubleHashFunction(int size, void* dado); //testado
 #endif//
