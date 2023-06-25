@@ -22,3 +22,7 @@ bool compara(void* dadoTable, void* dadoComp){
         return false;
     }
 }
+int passos(int size, void* dado){
+    munic* aux = (munic*) dado;
+    return 1 + (aux->CodSiafi % (size - 1));
+}
