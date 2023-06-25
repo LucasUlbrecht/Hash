@@ -29,25 +29,33 @@ void testHashfy2(hash t){
     int pos;
     pos=t.get_key(t.size, &aux);
     assert(pos==8);
+    munic aux1;
+    aux1.CodSiafi=58;
+    int pos1;
+    pos1=t.get_key(t.size, &aux1);
+    assert(pos1==6);
 }
 void testInsert(hash t){
-    /*
-    munic* munic1;
-    munic* munic2;
-    munic* munic3;
-    munic1->CodSiafi=1;
-    munic2->CodSiafi=2;
-    munic3->CodSiafi=3;
-    genHash(&t, 13, getKey);
-    insert(&t, munic1);
-    insert(&t, munic2);
-    insert(&t, munic3);
-    */
+    munic munic1;
+    munic munic2;
+    munic munic3;
+    munic1.CodSiafi=8;
+    munic2.CodSiafi=13;
+    munic3.CodSiafi=60;
+    insert(&t, &munic1);
+    insert(&t, &munic2);
+    insert(&t, &munic3);
+    munic* test= (munic*)t.table[8];
+    assert(test==&munic1);
+    munic* test1= (munic*)t.table[0];
+    assert(test1==&munic2);
+    munic* test2= (munic*)t.table[9];
+    assert(test2==&munic3);
 }
 int main (void){
     hash t;
     testGen(&t);
     testHashfy(t);
     testHashfy2(t);
-    //testInsert(t);
-}//
+    testInsert(t);
+}
