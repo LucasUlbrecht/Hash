@@ -1,7 +1,7 @@
 #include "../src/ex.h"
 #include <assert.h>
 void testGen(hash* t){
-    genHash(t, 13, doubleHashFunction, compara);
+    genHash(t, 13, doubleHashFunction, compara, passos);
     assert(t->size==13);
     assert(t->get_key!=NULL);
 }
