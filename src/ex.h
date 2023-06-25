@@ -32,4 +32,4 @@ void gerarLista(hash t);
 void printDado(hash t);
 uintptr_t getKey(hash t, void* dado);
 
-#endif
+#endif//

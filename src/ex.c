@@ -12,4 +12,4 @@ bool compara(void* dadoTable, void* dadoComp){
     }else{
         return false;
     }
-}
+}//

@@ -24,4 +24,4 @@ void insert(hash** t, void* dado); //feito, sem testar
 void genHash(hash** t, int size, uintptr_t (*getKey)(hash, void*), bool (*compara)(void*, void*)); //feito, sem testar
 //void deleteHash(hash** t, void* dado), não iniciado
 //void encerrarHash(hash** t,), não iniciado
-#endif
+#endif//

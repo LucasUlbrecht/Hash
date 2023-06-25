@@ -84,4 +84,4 @@ void reSize(hash** t){
     };
     //encerra
     t=&nova;
-}
+}//
