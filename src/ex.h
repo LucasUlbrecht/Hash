@@ -28,8 +28,9 @@ typedef struct MunicipiosBrasileiros
     char SiglaUF[MAX_SIGLA_UF+1];
     char Regiao[MAX_NOME_REGIAO+1];
 }munic;
-void gerarLista(hash t);
-void printDado(hash t);
-uintptr_t getKey(hash t, void* dado);
-
+//void gerarLista(hash t);
+//void printDado(hash t);
+int getKey(int t, int cod); //testado
+bool compara(void* dadoTable, void* dadoComp); //testado
+unsigned int doubleHashFunction(int size, void* dado);
 #endif//

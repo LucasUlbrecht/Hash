@@ -30,11 +30,6 @@ codigo_ibge,nome,latitude,longitude,capital,codigo_uf,siafi_id,ddd,fuso_horario
 2400208,Açu,-5.58362,-36.914,0,24,1603,84,America/Sao_Paulo
 3100500,Açucena,-19.0671,-42.5419,0,31,4009,33,America/Sao_Paulo
 3500105,Adamantina,-21.682,-51.0737,0,35,6101,18,America/Sao_Paulo
-5200159,Adelândia,-16.4127,-50.1657,0,52,9769,64,America/Sao_Paulo
-3500204,Adolfo,-21.2325,-49.6451,0,35,6103,17,America/Sao_Paulo
-4100202,Adrianópolis,-24.6606,-48.9922,0,41,7403,41,America/Sao_Paulo
-2900355,Adustina,-10.5437,-38.1113,0,29,3253,75,America/Sao_Paulo
-2600104,Afogados da Ingazeira,-7.74312,-37.631,0,26,2301,87,America/Sao_Paulo
 2400307,Afonso Bezerra,-5.49229,-36.5075,0,24,1605,84,America/Sao_Paulo
 3200102,Afonso Cláudio,-20.0778,-41.1261,0,32,5601,27,America/Sao_Paulo
 2100105,Afonso Cunha,-4.13631,-43.3275,0,21,0701,98,America/Sao_Paulo
