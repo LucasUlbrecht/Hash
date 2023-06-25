@@ -1,22 +1,23 @@
 int main (void){
+    int resposta = 6;
     //Hash hash;
-    int resposta=interface();
+    //int resposta=interface();
     //Respostas: 0-Teste Funcionalidades, 1-Inserir Lista, 2-Buscar por, 3-Remover Elemento, 4-Ler Lista Gerada, 5-Encerrar Programa 
     switch (resposta)
     {
     case 1:
-        insercaoHash();
+        //insercaoHash();
         break;
     case 2:
-        buscaHash();
+        //buscaHash();
         break;
     case 3:
-        remocaoHash();
+        //remocaoHash();
         break;
     case 4:
-        gerarLista();
+        //gerarLista();
     case 5:
-        encerrarPrograma();
+        //encerrarPrograma();
     default:
         break;
     }

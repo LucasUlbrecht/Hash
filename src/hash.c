@@ -1,4 +1,5 @@
 #include "hash.h"
+/*
 bool checksize(hash* t){
     if(t->atualSize%t->size<0.7){
         return true; //Tamanho aceitavel
@@ -17,6 +18,7 @@ void hash_apaga(hash *h){
     }
     free(h->table);
 }
+*/
 bool primo(int num) {
     if (num <= 1) {
         return false;
@@ -39,11 +41,11 @@ int acharPrimoProx(int num) {
     int maior = num + 1;
     
     while (true) {
-        if (isPrime(menor)) {
+        if (primo(menor)) {
             return menor;
         }
         
-        if (isPrime(maior)) {
+        if (primo(maior)) {
             return maior;
         }
         
@@ -51,13 +53,19 @@ int acharPrimoProx(int num) {
         maior++;
     }
 }
-void genHash(hash** t, int size, uintptr_t (*getKey)(hash, void*), bool (*compara)(void*, void*)){
-    *t=(hash*)calloc(size,sizeof(hash));
-    (*t)->table=(uintptr_t)calloc(size,sizeof(uintptr_t));
-    (*t)->get_key=getKey;
-    (*t)->deleted='*';
-    (*t)->compara=compara;
+
+
+void genHash(hash* t, int size, unsigned int (*getKey)(int, void*), bool (*compara)(void*, void*)){
+    t->table=(uintptr_t*)calloc(size,sizeof(uintptr_t));
+    if (t->table == NULL){
+        return;
+    }
+    t->size=(unsigned int)size;
+    t->get_key=getKey;
+    t->deleted='*';
+    t->compara=compara;
 }
+/*
 void insert(hash** t, void* dado){
     if(t==NULL||dado==NULL) return;
     uintptr_t pos = (*t)->get_key(**t, dado);
@@ -84,4 +92,4 @@ void reSize(hash** t){
     };
     //encerra
     t=&nova;
-}//
+}*/

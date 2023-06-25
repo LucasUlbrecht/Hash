@@ -1,9 +1,18 @@
 #include "ex.h"
-uintptr_t getKey(hash t, void* dado){
-    munic* aux = (munic*) dado;
-    uintptr_t auxCod=aux->CodSiafi;
-    return (uintptr_t) auxCod%t.size;
+
+int getKey(int t, int cod){
+    
+    return cod%t;
 }
+
+unsigned int doubleHashFunction(int size, void* dado)
+{
+    munic* aux = (munic*) dado;
+    unsigned int hash1 = getKey(size, aux->CodSiafi);
+    unsigned int hash2 = 1 + (aux->CodSiafi % (size - 1));
+    return (hash1 + acharPrimoProx(size) * hash2) % size;
+}
+
 bool compara(void* dadoTable, void* dadoComp){
     munic* auxTable = (munic*)dadoTable;
     munic* auxComp = (munic*)dadoComp;
@@ -12,4 +21,4 @@ bool compara(void* dadoTable, void* dadoComp){
     }else{
         return false;
     }
-}//
+}
