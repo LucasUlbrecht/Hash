@@ -1,5 +1,4 @@
 #include "../src/ex.h"
-#include <assert.h>
 void testGen(hash* t){
     genHash(t, 13, doubleHashFunction, compara, passos);
     assert(t->size==13);
@@ -36,25 +35,25 @@ void testHashfy2(hash t){
     pos1=t.get_key(t.size, &aux1);
     assert(pos1==6);
 }
-void testInsert(hash t){
-    munic munic1;
-    munic munic2;
-    munic munic3;
-    munic1.CodSiafi=8;
-    strcpy(munic1.Capital, "MS");
-    munic2.CodSiafi=13;
-    strcpy(munic2.Capital, "RJ");
-    munic3.CodSiafi=60;
-    strcpy(munic3.Capital, "SP");
-    insert(&t, &munic1);
-    insert(&t, &munic2);
-    insert(&t, &munic3);
-    munic* test= (munic*)t.table[8];
-    assert(test==&munic1);
-    munic* test1= (munic*)t.table[0];
-    assert(test1==&munic2);
-    munic* test2= (munic*)t.table[9];
-    assert(t.atualSize==3);
+void testInsert(hash* t){
+    munic* munic1 = (munic*)malloc(sizeof(munic));;
+    munic* munic2 = (munic*)malloc(sizeof(munic));;
+    munic* munic3 = (munic*)malloc(sizeof(munic));;
+    munic1->CodSiafi=8;
+    strcpy(munic1->Capital, "MS");
+    munic2->CodSiafi=13;
+    strcpy(munic2->Capital, "RJ");
+    munic3->CodSiafi=60;
+    strcpy(munic3->Capital, "SP");
+    insert(&t, munic1);
+    insert(&t, munic2);
+    insert(&t, munic3);
+    munic* test= (munic*)t->table[8];
+    assert(test==munic1);
+    munic* test1= (munic*)t->table[0];
+    assert(test1==munic2);
+    munic* test2= (munic*)t->table[9];
+    assert(t->atualSize==3);
 }
 void testBusca(hash t){
     munic dado;
@@ -74,33 +73,38 @@ void testBusca(hash t){
     assert(strcmp(test2->Capital, "SP")==0);
 }
 
-void testReSize(hash t){
-    munic munic1;
-    munic munic2;
-    munic munic3;
-    munic munic4;
-    munic munic5;
-    munic munic6;
-    munic1.CodSiafi=1;
-    munic2.CodSiafi=2;
-    munic3.CodSiafi=3;
-    munic4.CodSiafi=4;
-    munic5.CodSiafi=5;
-    munic6.CodSiafi=6;
-    insert(&t, &munic1);
-    insert(&t, &munic2);
-    insert(&t, &munic3);
-    insert(&t, &munic4);
-    insert(&t, &munic5);
-    insert(&t, &munic6);
-    assert(t.size==29);
+void testReSize(hash** t) {
+    munic* munic1 = (munic*)malloc(sizeof(munic));
+    munic* munic2 = (munic*)malloc(sizeof(munic));
+    munic* munic3 = (munic*)malloc(sizeof(munic));
+    munic* munic4 = (munic*)malloc(sizeof(munic));
+    munic* munic5 = (munic*)malloc(sizeof(munic));
+    munic* munic6 = (munic*)malloc(sizeof(munic));
+    munic* munic7 = (munic*)malloc(sizeof(munic));
+    munic1->CodSiafi = 1;
+    munic2->CodSiafi = 2;
+    munic3->CodSiafi = 3;
+    munic4->CodSiafi = 4;
+    munic5->CodSiafi = 5;
+    munic6->CodSiafi = 6;
+    munic7->CodSiafi = 7;
+    insert(t, munic1);
+    insert(t, munic2);
+    insert(t, munic3);
+    insert(t, munic4);
+    insert(t, munic5);
+    insert(t, munic6);
+    insert(t, munic7);
+    assert((*t)->atualSize == 10);
+    assert((*t)->size == 169);
 }
 int main (void){
-    hash t;
-    testGen(&t);
-    testHashfy(t);
-    testHashfy2(t);
+    hash* t;
+    t=(hash*)calloc(1,sizeof(hash));
+    testGen(t);
+    testHashfy(*t);
+    testHashfy2(*t);
     testInsert(t);
-    testBusca(t);
-    testReSize(t);
+    testBusca(*t);
+    testReSize(&t);
 }
