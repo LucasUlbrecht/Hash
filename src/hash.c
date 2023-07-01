@@ -88,12 +88,12 @@ void * search(hash* t, void* dado){
 void reSize(hash* t) {
     int tamanhoNovo = t->size;
     tamanhoNovo = acharPrimoProx(tamanhoNovo * 2);
-    hash* nova;
+    hash nova;
     genHash(&nova, tamanhoNovo, t->get_key, t->compara, t->passos);
     for (int i = 0; i < t->size; i++) {
-        insert(nova, (void*)t->table[i]);
+        insert(&nova, (void*)t->table[i]);
     }
     free(t->table);
     free(t);
-    t = nova;
+    t = &nova;
 }
