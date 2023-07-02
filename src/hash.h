@@ -21,9 +21,9 @@ int acharPrimoProx(int num); //feito, testado
 bool checksize(hash* t); //feito, sem testar
 void * search(hash* t, void* dado); //feito, sem testar
 
-void reSize(hash** t); //em andamento
+void reSize(hash** t); //feito, testado
 void insert(hash** t, void* dado); //feito, testado
 void genHash(hash* t, int size, unsigned int (*getKey)(int, void*), bool (*compara)(void*, void*), int (*passos) (int, void*)); //feito, testado
-//void deleteHash(hash* t, void* dado);//, não iniciado
+void deleteHash(hash* t, void* dado);//, não iniciado
 void encerrarHash(hash* t);//, não iniciado
 #endif//

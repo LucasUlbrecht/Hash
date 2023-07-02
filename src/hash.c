@@ -83,6 +83,16 @@ void insert(hash** t, void* dado) {
     }
 }
 
+void deleteHash(hash* t, void* dado){
+    if(t==NULL||dado==NULL) return NULL;
+    uintptr_t pos = t->get_key(t->size, dado);
+    while(!(t->compara((void*)t->table[pos],dado))) {
+        pos = (pos + t->passos(t->size, dado)) % t->size;
+    }
+    t->table[pos] = t->deleted;
+    return;
+}
+
 void * search(hash* t, void* dado){
     if(t==NULL||dado==NULL) return NULL;
     uintptr_t pos = t->get_key(t->size, dado);
@@ -112,4 +122,9 @@ void reSize(hash** t) {
 
     free(nova);
     printf("remoção concluída");
+}
+void encerrarHash(hash* t){
+    free(t->table);
+    free(t);
+    return;
 }
