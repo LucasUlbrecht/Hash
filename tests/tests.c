@@ -96,7 +96,7 @@ void testReSize(hash** t) {
     insert(t, munic6);
     insert(t, munic7);
     assert((*t)->atualSize == 10);
-    assert((*t)->size == 169);
+    assert((*t)->size == 23);
 }
 int main (void){
     hash* t;

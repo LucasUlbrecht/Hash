@@ -1,6 +1,6 @@
 #include "hash.h"
 bool checksize(hash* t){
-    printf("testando\n");
+    //printf("testando\n");
     float div = (float)((float)t->atualSize/(float)t->size);
     printf("atual: %d, size: %d, div: %f\n", t->atualSize, t->size, div);
     if(div<0.7){
@@ -65,7 +65,7 @@ void genHash(hash* t, int size, unsigned int (*getKey)(int, void*), bool (*compa
     t->atualSize=0;
     t->size=(unsigned int)size;
     t->get_key=getKey;
-    t->deleted='*';
+    t->deleted = '*';
     t->compara=compara;
     t->passos=passos;
 }
@@ -74,8 +74,11 @@ void insert(hash** t, void* dado) {
     if (*t == NULL || dado == NULL)
         return;
     uintptr_t pos = (*t)->get_key((*t)->size, dado);
-    while ((void*)(*t)->table[pos] != NULL && (*t)->table[pos] != (*t)->deleted)
-        pos = (pos + (*t)->passos((*t)->size, dado)) % (*t)->size;
+    int valorPasso= (*t)->passos((*t)->size, dado);
+    while ((void*)(*t)->table[pos] != NULL && (*t)->table[pos] != (*t)->deleted) {
+    //printf("posicao: %d, size: %d\n", pos, (*t)->size);
+    pos = (pos + valorPasso) % (*t)->size;
+    }
     (*t)->table[pos] = (uintptr_t)dado;
     (*t)->atualSize++;
     if (!checksize(*t)) {
@@ -96,34 +99,43 @@ void deleteHash(hash* t, void* dado){
 void * search(hash* t, void* dado){
     if(t==NULL||dado==NULL) return NULL;
     uintptr_t pos = t->get_key(t->size, dado);
+    uintptr_t posInit = t->get_key(t->size, dado);
+    int valorPasso = t->passos(t->size, dado);
     while(!(t->compara((void*)t->table[pos],dado))) {
-        pos = (pos + t->passos(t->size, dado)) % t->size;
+        pos = (pos + valorPasso) %(t->size);
+        //printf("posicao: %d, size: %d\n", pos, t->size);
+        if(pos==posInit){
+            printf("Codigo não encontrado\n");
+            break;
+        }
         }
     return (void*) t->table[pos];
 }
 void reSize(hash** t) {
-    printf("\niniciando\n");
-    int tamanhoNovo = ((*t)->size) * ((*t)->size);
+    //printf("\niniciando\n");
+    int tamanhoNovo = ((*t)->size) * 2;
+    tamanhoNovo=acharPrimoProx(tamanhoNovo);
     hash* nova = (hash*)calloc(1, sizeof(hash));
     genHash(nova, tamanhoNovo, (*t)->get_key, (*t)->compara, (*t)->passos);
     for (int i = 0; i < (*t)->size; i++) {
         if ((*t)->table[i] != NULL && (*t)->table[i] != (*t)->deleted) {
             insert(&nova, (void*)(*t)->table[i]);
-            printf("inserção concluída\n");
+            //printf("inserção concluída\n");
         }
     }
-    printf("inserções concluídas\n");
+    //printf("inserções concluídas\n");
 
     free((*t)->table);
-    printf("remoção concluída");
+    //printf("remoção concluída");
 
     (*t)->table = nova->table;
     (*t)->size = nova->size;
 
     free(nova);
-    printf("remoção concluída");
+    //printf("remoção concluída");
 }
 void encerrarHash(hash* t){
+    hash_apaga(t);
     free(t->table);
     free(t);
     return;

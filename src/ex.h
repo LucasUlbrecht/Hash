@@ -1,6 +1,7 @@
 #ifndef _EX_
 #define _EX_
 #include"hash.h"
+#include<string.h>
 #define TAM_LIXO 70
 #define MAX_NOME_MUNICIPIO 29
 #define MAX_SIGLA_UF 2
@@ -28,10 +29,15 @@ typedef struct MunicipiosBrasileiros
     char SiglaUF[MAX_SIGLA_UF+1];
     char Regiao[MAX_NOME_REGIAO+1];
 }munic;
-//void gerarLista(hash t);
-//void printDado(hash t);
+void insercaoHash(hash** t); //testando
+int gerarLista(hash** t); //testado
+void buscaHash(hash** t); //testando
+void remocaoHash(hash** t);
+void delet(void* dado);
+void printDado(void* dado); //testado
 int passos(int size, void* dado);
 int getKey(int t, int cod); //testado
 bool compara(void* dadoTable, void* dadoComp); //testado
 unsigned int doubleHashFunction(int size, void* dado); //testado
+bool checkDel (void* dado);
 #endif//
