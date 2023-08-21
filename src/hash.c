@@ -89,8 +89,9 @@ void insert(hash** t, void* dado) {
 void deleteHash(hash* t, void* dado){
     if(t==NULL||dado==NULL) return NULL;
     uintptr_t pos = t->get_key(t->size, dado);
+    int valorPasso= (t)->passos((t)->size, dado);
     while(!(t->compara((void*)t->table[pos],dado))) {
-        pos = (pos + t->passos(t->size, dado)) % t->size;
+        pos = (pos + valorPasso) % t->size;
     }
     t->table[pos] = t->deleted;
     return;
@@ -106,7 +107,7 @@ void * search(hash* t, void* dado){
         //printf("posicao: %d, size: %d\n", pos, t->size);
         if(pos==posInit){
             printf("Codigo não encontrado\n");
-            break;
+            return NULL;
         }
         }
     return (void*) t->table[pos];
